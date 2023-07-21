@@ -62,17 +62,46 @@ class K3 extends Object implements Y2,Y3 {
 	
 }
 
+class Z implements Y1 {
+
+	@Override
+	public void a() {
+		System.out.println("a");
+	}
+
+	@Override
+	public void a2() {
+		System.out.println("a2");
+	}
+
+	@Override
+	public void a3() {
+		System.out.println("a3");
+	}
+	
+}
+
+
 public class InterfaceTest {
 
 	public static void main(String[] args) {
 //		Y2 y = new Y2(); // error -> interface는 객체 생성(new) 불가
-		K k = new K();
-		k.x();
+//		K k = new K();
+//		k.x();
+//		
+//		// 다형성(매우중요)
+//		Y2 k2 = new K();
+//		k2.x();
 		
-		// 다형성(매우중요)
-		Y2 k2 = new K();
-		k2.x();
-		
+		Z z = new Z();
+		z.a();
+		z.a2();
+		z.a3();
+		System.out.println(Y1.NUM); // 상수는 클래스명(인터페이스명)으로 접근
+		System.out.println(Y1.SIZE);
+		System.out.println(Y1.COUNT);
+		z.b(); // default 메서는 일반적인 콘크리트 메서드처럼 사용
+		Y1.c(); // static -> 클래스명(인터페이스명)으로 접근
 	}
 
 }
