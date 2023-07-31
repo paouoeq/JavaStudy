@@ -22,7 +22,7 @@ public class Student {
 	}
 	
 	public void takeSubway(Subway s) {
-		if(money < money-1000) {
+		if(money < money-1500) {
 			System.out.println("잔액이 부족합니다.");
 		} else {
 			money -= 1500;
