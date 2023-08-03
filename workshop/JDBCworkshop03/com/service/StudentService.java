@@ -1,0 +1,14 @@
+package com.service;
+
+import java.util.List;
+
+import com.dto.StudentDTO;
+
+public interface StudentService {
+
+	public List<StudentDTO> findAll();
+	
+	public List<StudentDTO> findName(String name);
+	
+	public List<StudentDTO> findYear(String sYear, String eYear);
+}
