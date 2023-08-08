@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StudentMapper">
+  
+   <select id="findAll" resultType="StudentDTO">
+     select STUDENT_NO stuNo, STUDENT_NAME stuName, 
+	 (substr(STUDENT_SSN,1,8)||'******') stuSsn, 
+	 (substr(STUDENT_ADDRESS, 1, 10)||'...') stuAddress, 
+	 to_char(ENTRANCE_DATE, 'YYYY/MM/DD') entDate, 
+	 ABSENCE_YN absYn
+	 from TB_STUDENT ORDER by 5
+   </select>
+   
+   <select id="findName" resultType="StudentDTO" parameterType="string">
+   	 select STUDENT_NO stuNo, STUDENT_NAME stuName, 
+	 (substr(STUDENT_SSN,1,8)||'******') stuSsn, 
+	 (substr(STUDENT_ADDRESS, 1, 10)||'...') stuAddress, 
+	 to_char(ENTRANCE_DATE, 'YYYY/MM/DD') entDate, 
+	 ABSENCE_YN absYn
+	 from TB_STUDENT 
+	 where STUDENT_NAME like '%'||#{stuName}||'%'
+   </select>
+   
+   <select id="findYear" resultType="StudentDTO" parameterType="hashmap">
+   	 select STUDENT_NO stuNo, STUDENT_NAME stuName, 
+	 (substr(STUDENT_SSN,1,8)||'******') stuSsn, 
+	 (substr(STUDENT_ADDRESS, 1, 10)||'...') stuAddress, 
+	 to_char(ENTRANCE_DATE, 'YYYY/MM/DD') entDate, 
+	 ABSENCE_YN absYn 
+	 from TB_STUDENT 
+	 where to_char(ENTRANCE_DATE, 'YYYY') between #{sYear} and #{eYear} 
+	 order by 5
+   </select>
+   
+   <select id="findNumAll" resultType="StudentDTO" parameterType="arraylist">
+     select STUDENT_NO stuNo, STUDENT_NAME stuName,  
+	 (substr(STUDENT_SSN,1,8)||'******') stuSsn, (substr(STUDENT_ADDRESS, 1, 10)||'...') stuAddress, 
+	 to_char(ENTRANCE_DATE, 'YYYY/MM/DD') entDate, ABSENCE_YN absYn   
+	 from TB_STUDENT 
+	 <where>
+	   <foreach item="item" collection="list"
+	 	  open="STUDENT_NO IN (" separator="," close=")">
+	 	  #{item}
+	   </foreach>
+	 </where>
+	 
+   
+   </select>
+  
+</mapper>
