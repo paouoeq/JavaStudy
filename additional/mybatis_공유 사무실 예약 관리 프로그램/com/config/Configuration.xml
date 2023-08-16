@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+  <typeAliases> <!-- Mapper의 resultType, parameterType에 별칭사용 -->
+	<typeAlias alias="MDTO" type="com.dto.MDTO" /> 
+	<typeAlias alias="CDTO" type="com.dto.CDTO" /> 
+	<typeAlias alias="PDTO" type="com.dto.PDTO" /> 
+	<typeAlias alias="RDTO" type="com.dto.RDTO" /> 
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <property name="username" value="minipj"/>
+        <property name="password" value="minipj"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+    <mapper resource="com/config/MinipjMapper.xml"/>
+  </mappers>
+</configuration>
