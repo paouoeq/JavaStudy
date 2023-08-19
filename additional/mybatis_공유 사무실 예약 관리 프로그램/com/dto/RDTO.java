@@ -16,12 +16,11 @@ public class RDTO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public RDTO(int place_no, int client_no, char end_use, String res_date, int res_no) {
+	public RDTO(int place_no, int client_no, char end_use, String res_date) {
 		this.place_no = place_no;
 		this.client_no = client_no;
 		this.end_use = end_use;
 		this.res_date = res_date;
-		this.res_no = res_no;
 	}
 	
 	public RDTO(int client_no, String res_date, String client_nm, String place_nm) {

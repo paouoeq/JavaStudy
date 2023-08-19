@@ -10,9 +10,8 @@ public class CDTO {
 	public CDTO() {
 		// TODO Auto-generated constructor stub
 	}
-	public CDTO(int client_no, String client_id, String client_pw, String client_nm, String phone,
+	public CDTO(String client_id, String client_pw, String client_nm, String phone,
 			String secession_fl) {
-		this.client_no = client_no;
 		this.client_id = client_id;
 		this.client_pw = client_pw;
 		this.client_nm = client_nm;

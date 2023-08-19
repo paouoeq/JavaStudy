@@ -19,15 +19,18 @@
   
   <insert id ="addC" parameterType="CDTO" >
     insert into client (client_no, client_id, client_pw, client_nm, phone, secession_fl) 
-    values (#{client_no}, #{client_id}, #{client_pw}, #{client_nm}, #{phone}, #{secession_fl})
+    values (client_no_seq.nextval, #{client_id}, #{client_pw}, #{client_nm}, #{phone}, #{secession_fl})
   </insert>
   
   <insert id ="addM" parameterType="MDTO" >
     insert into manager (MANAGER_NO, MANAGER_ID, MANAGER_PW, PHONE) 
-    values (#{manager_no}, #{manager_id}, #{manager_pw}, #{phone})
+    values (manage_no_seq.nextval, #{manager_id}, #{manager_pw}, #{phone})
   </insert>
   
   <!-- 클라이언트 -->
+  <select id="selectResAll" resultType="RDTO">
+  	select place_no, place_nm from place
+  </select>
   <select id="selectReservation" resultType="RDTO">
   	select place_no, client_no, end_use, res_date, res_no
 	from reservation
@@ -41,10 +44,10 @@
   
   <insert id="addRes" parameterType="RDTO">
   	insert into reservation (place_no, client_no, end_use, res_date, res_no)
-  	values (#{place_no}, #{client_no}, #{end_use}, #{res_date}, #{res_no})
+  	values (#{place_no}, #{client_no}, #{end_use}, #{res_date}, res_no_seq.nextval)
   </insert>
   
-  <select id="findRes" resultType="RDTO" parameterType="int">
+  <select id="selectClientNoRes" resultType="RDTO" parameterType="int">
   	select place_no, client_no, end_use, substr(res_date,1,4)||'년'||substr(res_date,5,2)||'월'||substr(res_date,7,2)||'일' res_date, res_no
 	from reservation
 	where client_no=#{client_no}

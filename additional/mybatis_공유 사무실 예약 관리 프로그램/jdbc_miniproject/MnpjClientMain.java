@@ -27,17 +27,17 @@ public class MnpjClientMain {
 			System.out.println();
 			
 			if(n==1) {
-				System.out.println("201. H1");
-				System.out.println("202. H2");
-				System.out.println("203. H3");
-				System.out.println("204. H4");
-				System.out.println("205. H5\n");
-				System.out.print("지점을 입력하세요 : ");
+				MService service = new MServiceImpl();
+				
+				List<RDTO> plist = service.selectResAll();
+				for(RDTO rdto : plist) {
+					System.out.println(rdto.getPlace_no()+". "+rdto.getPlace_nm());
+				}
+				System.out.print("\n지점을 입력하세요 : ");
 				int place_no = sc.nextInt();
 				System.out.println();
 				
 				System.out.println("[예약 불가 일정]");
-				MService service = new MServiceImpl();
 				List<RDTO> list = service.placeResList(place_no);
 				for(RDTO rdto : list) {
 					System.out.println("["+rdto.getRes_date()+"]");
@@ -45,18 +45,22 @@ public class MnpjClientMain {
 				
 			}
 			else if(n==2) {
-				System.out.println("[예약신청]\n");
-				System.out.println("201. H1");
-				System.out.println("202. H2");
-				System.out.println("203. H3");
-				System.out.println("204. H4");
-				System.out.println("205. H5\n");
-				System.out.print("예약할 지점을 입력하세요 : ");
+				MService service = new MServiceImpl();
+				
+				List<RDTO> plist = service.selectResAll();
+				for(RDTO rdto : plist) {
+					System.out.println(rdto.getPlace_no()+". "+rdto.getPlace_nm());
+				}
+				System.out.println("0. 뒤로가기");
+				
+				System.out.print("\n예약할 지점을 입력하세요 : ");
 				int place_no = sc.nextInt();
+				if(place_no == 0) {
+					main(dto);
+				}
 				System.out.print("예약할 날짜를 입력하세요 : ");
 				String res_date = sc.next();
 
-				MService service = new MServiceImpl();
 				
 				// 검증
 				List<RDTO> selectListPNo = service.selectResDateWherePNo(place_no);
@@ -69,11 +73,9 @@ public class MnpjClientMain {
 					}
 				}
 				
-				System.out.print("예약 번호를 입력하세요 : ");
-				int res_no = sc.nextInt();
-				RDTO rdto = new RDTO(place_no, dto.getClient_no(), 'N', res_date, res_no);
+				RDTO rdto = new RDTO(place_no, dto.getClient_no(), 'N', res_date);
 				
-				int rn = service.addRes(rdto);
+				service.addRes(rdto);
 				System.out.println("\n[예약이 완료되었습니다.]");
 				
 			}
@@ -81,13 +83,14 @@ public class MnpjClientMain {
 				System.out.println("[예약조회]\n");
 				
 				MService service = new MServiceImpl();
-				List<RDTO> list = service.findRes(dto.getClient_no());
+				List<RDTO> list = service.selectClientNoRes(dto.getClient_no());
 				for(RDTO rdto : list) {
 					System.out.println(rdto.getRes_no()+". ["+rdto.getRes_date()+"]");
 				}
 				System.out.println();
 				System.out.println("1. 예약 취소");
 				System.out.println("2. 예약 변경");
+				System.out.println("0. 뒤로가기");
 				System.out.print("메뉴를 입력해주세요 >> ");
 				int n3 = sc.nextInt();
 				
@@ -95,7 +98,7 @@ public class MnpjClientMain {
 					System.out.println("\n[예약 취소]\n");
 					System.out.print("취소하실 예약 번호 입력 >> ");
 					int deleteRes_no = sc.nextInt();
-					int n3_1 = service.deleteRes(deleteRes_no);
+					service.deleteRes(deleteRes_no);
 					System.out.println("\n[예약 취소 완료]\n");
 				}
 				else if(n3==2) {
@@ -121,8 +124,11 @@ public class MnpjClientMain {
 					map.put("res_no", updateRes_no);
 					map.put("res_date", updateRes_date);
 					
-					int n3_2 = service.updateResDate(map);
+					service.updateResDate(map);
 					System.out.println("\n[변경 완료]\n");
+				}
+				else if(n3==0) {
+					main(dto);
 				}
 			}
 			else if(n==9) {

@@ -10,8 +10,7 @@ public class MDTO {
 	public MDTO() {
 		// TODO Auto-generated constructor stub
 	}
-	public MDTO(int manager_no, String manager_id, String manager_pw, String phone) {
-		this.manager_no = manager_no;
+	public MDTO(String manager_id, String manager_pw, String phone) {
 		this.manager_id = manager_id;
 		this.manager_pw = manager_pw;
 		this.phone = phone;

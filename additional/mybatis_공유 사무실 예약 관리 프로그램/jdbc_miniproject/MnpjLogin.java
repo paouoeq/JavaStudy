@@ -71,8 +71,6 @@ public class MnpjLogin {
 				System.out.println();
 				
 				if(n2==1) {
-					System.out.print("번호를 입력해주세요 >> ");
-					int client_no = sc.nextInt();
 					System.out.print("아이디를 입력해주세요 >> ");
 					String client_id = sc.next();
 					System.out.print("비밀번호를 입력해주세요 >> ");
@@ -81,17 +79,13 @@ public class MnpjLogin {
 					String client_nm = sc.next();
 					System.out.print("핸드폰 번호를 입력해주세요 >> ");
 					String phone = sc.next();
-					System.out.print("탈퇴여부를 입력해주세요 >> ");
-					String secession_fl = sc.next();
 					System.out.println();
 					
 					MService svc = new MServiceImpl();
-					int cn = svc.addC(new CDTO(client_no, client_id, client_pw, client_nm, phone, secession_fl));
+					svc.addC(new CDTO(client_id, client_pw, client_nm, phone, "N"));
 					System.out.println("회원가입 되었습니다.");
 				}
 				else if(n2==2) {
-					System.out.print("번호를 입력해주세요 >> ");
-					int manager_no = sc.nextInt();
 					System.out.print("아이디를 입력해주세요 >> ");
 					String manager_id = sc.next();
 					System.out.print("비밀번호를 입력해주세요 >> ");
@@ -101,7 +95,7 @@ public class MnpjLogin {
 					System.out.println();
 					
 					MService svc = new MServiceImpl();
-					int mn = svc.addM(new MDTO(manager_no, manager_id, manager_pw, phone));
+					svc.addM(new MDTO(manager_id, manager_pw, phone));
 					System.out.println("회원가입 되었습니다.");
 				}
 				

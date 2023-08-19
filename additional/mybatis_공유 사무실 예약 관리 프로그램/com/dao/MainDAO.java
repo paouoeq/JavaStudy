@@ -43,6 +43,10 @@ public class MainDAO {
 	
 	
 	// 클라이언트
+	public List<RDTO> selectResAll(SqlSession session) {
+		List<RDTO> list = session.selectList("MinipjMapper.selectResAll");
+		return list;
+	}
 	public List<RDTO> placeResList(SqlSession session, int place_no) {
 		List<RDTO> list = session.selectList("MinipjMapper.placeResList", place_no);
 		return list;
@@ -57,8 +61,8 @@ public class MainDAO {
 		return n;
 	}
 	
-	public List<RDTO> findRes(SqlSession session, int client_no) {
-		List<RDTO> list = session.selectList("MinipjMapper.findRes", client_no);
+	public List<RDTO> selectClientNoRes(SqlSession session, int client_no) {
+		List<RDTO> list = session.selectList("MinipjMapper.selectClientNoRes", client_no);
 		return list;
 	}
 	

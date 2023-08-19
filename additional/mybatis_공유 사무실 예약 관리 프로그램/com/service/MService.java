@@ -22,10 +22,11 @@ public interface MService {
 	public MDTO managerLogin(String manager_id, String manager_pw);
 	
 	// 클라이언트
+	public List<RDTO> selectResAll();
 	public List<RDTO> placeResList(int place_no);
 	public List<RDTO> selectReservation();
 	public int addRes(RDTO dto);
-	public List<RDTO> findRes(int client_no);
+	public List<RDTO> selectClientNoRes(int client_no);
 	public int deleteRes(int res_no);
 	public int updateResDate(HashMap<String, Object> map);
 	

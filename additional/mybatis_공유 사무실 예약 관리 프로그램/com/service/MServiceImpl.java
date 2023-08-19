@@ -76,6 +76,19 @@ public class MServiceImpl implements MService {
 	
 	// 클라이언트
 	@Override
+	public List<RDTO> selectResAll() {
+		List<RDTO> list = null;
+		SqlSession session = MySqlSessionFactory.getSession();
+		try {
+			MainDAO dao = new MainDAO();
+			list = dao.selectResAll(session);
+
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	@Override
 	public List<RDTO> placeResList(int place_no) {
 		List<RDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSession();
@@ -118,12 +131,12 @@ public class MServiceImpl implements MService {
 	}
 
 	@Override
-	public List<RDTO> findRes(int client_no) {
+	public List<RDTO> selectClientNoRes(int client_no) {
 		List<RDTO> list = null;
 		SqlSession session = MySqlSessionFactory.getSession();
 		try {
 			MainDAO dao = new MainDAO();
-			list = dao.findRes(session, client_no);
+			list = dao.selectClientNoRes(session, client_no);
 		} finally {
 			session.close();
 		}

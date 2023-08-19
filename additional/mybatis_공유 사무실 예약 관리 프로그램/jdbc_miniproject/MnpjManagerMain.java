@@ -54,7 +54,7 @@ public class MnpjManagerMain {
 					}
 					System.out.print("지점을 선택하세요 : ");
 					int n2_2 = sc.nextInt();
-					int un = service.updateResEndUse(n2_2);
+					service.updateResEndUse(n2_2);
 					System.out.println(n2_2+"번 지점이 초기화 되었습니다.");
 				}
 			}
