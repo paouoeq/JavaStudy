@@ -3,6 +3,8 @@ package stu7;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class MemberAddressGroupMain {
@@ -21,7 +23,26 @@ public class MemberAddressGroupMain {
 		members.add(new Member("한길동", "인천광역시", "han@hotmail.com", 52));
 		members.add(new Member("나길동", "서울특별시", "na@naver.com", 29));
 
+//		Function<Member, String> classifier = new Function<Member, String>() {
+//			
+//			@Override
+//			public String apply(Member t) {
+//				// TODO Auto-generated method stub
+//				return t.getAddress();
+//			}
+//		};
+//		Map<String, List<Member>> map = members.stream().collect(Collectors.groupingBy(classifier));
+//		Set<String> keys = map.keySet();
+//		for(String key : keys) {
+//			System.out.println(key+" : "+map.get(key));
+//		}
 		
+		//람다
+		Map<String, List<Member>> map = members.stream().collect(Collectors.groupingBy(t->t.getAddress()));
+		Set<String> keys = map.keySet();
+		for(String key : keys) {
+			System.out.println(key+" : "+map.get(key));
+		}
 	}
 
 }

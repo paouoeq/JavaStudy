@@ -1,8 +1,10 @@
 package stu6;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MemberAddressListMain {
 
@@ -20,7 +22,8 @@ public class MemberAddressListMain {
 		members.add(new Member("한길동", "인천광역시", "han@hotmail.com", 52));
 		members.add(new Member("나길동", "서울특별시", "na@naver.com", 29));
 		
-		
+		List<String> list = members.stream().map(Member::getAddress).collect(Collectors.toList());
+		System.out.println(list);
 	}
 
 }
